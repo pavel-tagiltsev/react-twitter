@@ -1,11 +1,15 @@
 import AppHeader from "../app-header";
 import SearchPanel from "../search-panel";
+import PostStatusFilter from "../post-status-filter";
 
 const App = () => {
     return (
-        <div>
+        <div className="app">
            <AppHeader/>
-           <SearchPanel/> 
+           <div className="search-panel d-flex">
+                <SearchPanel/>
+                <PostStatusFilter/>
+           </div>
         </div> 
     )
 }
