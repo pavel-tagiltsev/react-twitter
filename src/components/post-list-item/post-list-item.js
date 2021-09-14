@@ -1,3 +1,5 @@
+import './post-list-item.css';
+
 const PostListItem = () => {
     return (
         <li className="app-list-item d-flex justify-content-between">
@@ -8,14 +10,14 @@ const PostListItem = () => {
                 <button 
                     type="button" 
                     className="btn-star btn-sm">
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                 </button>
                 <button 
                     type="button" 
                     className="btn-trash btn-sm">
-                    <i class="bi bi-trash-fill"></i>
+                    <i className="bi bi-trash-fill"></i>
                 </button>
-                <i class="bi bi-heart-fill"></i>
+                <i className="bi bi-heart-fill"></i>
             </div>
         </li>
     )
