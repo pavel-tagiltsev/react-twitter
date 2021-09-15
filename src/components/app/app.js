@@ -14,13 +14,15 @@ export default class App extends Component {
         super(props);
         this.state = {
             data: [
-                {label: 'Going to learn React', important: true, id: 'ejsalgj;ldagif'},
-                {label: 'That is so good', important: false, id: 'isafjidsafldks'},
-                {label: 'I need a breake...', important: false, id: 'dlksajfdisalif'}
+                {label: 'Going to learn React', important: true, like: false, id: 'ejsalgj;ldagif'},
+                {label: 'That is so good', important: false, like: false, id: 'isafjidsafldks'},
+                {label: 'I need a breake...', important: false, like: false, id: 'dlksajfdisalif'}
             ]
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.addItem = this.addItem.bind(this);
+        this.onToggleImportant = this.onToggleImportant.bind(this);
+        this.onToggleLiked = this.onToggleLiked.bind(this);
     }
 
     deleteItem(id) {
@@ -51,17 +53,55 @@ export default class App extends Component {
         })
     }
 
+    onToggleImportant(id) {
+        this.setState(({data}) => {
+            const index = data.findIndex((elem) => elem.id === id);
+
+            const old = data[index];
+            const newItem = {...old, important: !old.important};
+
+            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+            return {
+                data: newArr
+            }
+        })
+    }
+
+    onToggleLiked(id) {
+        this.setState(({data}) => {
+            const index = data.findIndex((elem) => elem.id === id);
+
+            const old = data[index];
+            const newItem = {...old, like: !old.like};
+
+            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+            return {
+                data: newArr
+            }
+        })
+    }
+
     render() {
+        const {data} = this.state;
+        const liked = data.filter((item) => item.like).length;
+        const allPosts = data.length;
+
         return (
             <div className="app">
-               <AppHeader/>
+               <AppHeader
+                    liked={liked}
+                    allPosts={allPosts}/>
                <div className="search-panel d-flex">
                     <SearchPanel/>
                     <PostStatusFilter/>
                </div>
                 <PostList 
                     posts={this.state.data}
-                    onDelete={this.deleteItem}/>
+                    onDelete={this.deleteItem}
+                    onToggleImportant={this.onToggleImportant}
+                    onToggleLiked={this.onToggleLiked}/>
                 <PostAddForm
                     onAdd={this.addItem}/>
             </div> 
