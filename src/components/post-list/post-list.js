@@ -2,18 +2,17 @@ import PostListItem from '../post-list-item';
 
 import './post-list.css';
 
-const PostList = ({posts, onDelete, onToggleImportant, onToggleLiked}) => {
+const PostList = ({posts, onDelete, onToggleTrigger}) => {
 
     const elements = posts.map((post) => {
-        const {id, ...itemProps} = post;
+        const {id} = post;
 
         return (
             <li key={id} className="list-group-item">
                 <PostListItem 
-                    {...itemProps} 
+                    {...post} 
                     onDelete={() => onDelete(id)}
-                    onToggleImportant={() => onToggleImportant(id)}
-                    onToggleLiked={() => onToggleLiked(id)}/>
+                    onToggleTrigger={onToggleTrigger}/>
             </li>
         )
     });
